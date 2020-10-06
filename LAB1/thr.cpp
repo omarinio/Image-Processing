@@ -35,5 +35,13 @@ int main() {
   //Save thresholded image
   imwrite("thr.jpg", gray_image);
 
+  namedWindow("Display window", CV_WINDOW_AUTOSIZE);
+
+  imshow("Display window", image);
+
+  waitKey(0);
+
+  image.release();
+
   return 0;
 }
