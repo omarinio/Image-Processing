@@ -21,7 +21,7 @@ int main() {
   Mat image(256, 256, CV_8UC1, Scalar(0));
   
   //draw white text HelloOpenCV!
-  putText(image, "HelloOpenCV!", Point(70, 70),
+  putText(image, "Testing if sshing works!", Point(70, 70),
 		FONT_HERSHEY_COMPLEX_SMALL, 0.8, cvScalar(255), 1, CV_AA);
 
   //save image to file
