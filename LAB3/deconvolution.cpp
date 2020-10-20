@@ -52,7 +52,7 @@ int main( int argc, char** argv )
  Mat recover;
 
  //ADJUST THIS FUNCTION CALL
- WienerDeconvoluition(gray_image,recover,15,3,0.001,0);
+ WienerDeconvoluition(gray_image,recover,10,3,0.005,0);
  imwrite( "recover.jpg", recover );
 
  return 0;
