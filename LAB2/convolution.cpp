@@ -14,7 +14,7 @@ int main() {
     Mat lowpass = Mat::ones(3, 3, CV_32F);
     
     Mat sharpen(3, 3, CV_32F, -1);
-    sharpen.at<float>(1,1) = 9;
+    sharpen.at<float>(1,1) = 8;
 
     Mat img = Mat::zeros(Size(image.cols-2,image.rows-2), CV_8UC1);
 
@@ -26,7 +26,7 @@ int main() {
                 for (int j = -1; j < 2; j++) {
                     sum += image.at<uchar>(y - i, x - j) * sharpen.at<float>(i+1, j+1);
                 }
-            }
+            } 
 
             img.at<uchar>(y-1,x-1) = sum;
         }
@@ -37,8 +37,11 @@ int main() {
     imshow("Display window", img);
 
     std::cout << "kernel: "<< std::endl << sharpen << std::endl<< std::endl;
+
+    std::cout << image.cols << image.rows << std::endl; 
+    
     //Save thresholded image
-    imwrite("sharpened.jpg", img);
+    imwrite("sharpen.jpg", img);
 
     waitKey(0);
 
