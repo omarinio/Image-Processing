@@ -1,0 +1,181 @@
+\documentclass[a4paper]{article}
+
+%% Language and font encodings
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+
+%% Sets page size and margins
+\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+%% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{subfig}
+
+\title{Introducción a MATLAB}
+\author{Benjamin Pastene}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+En el presente post, haremos una breve introducción de la herramienta MATLAB. Presentaremos funciones, operaciones y gráficos con más de dos datos, para asi luego ordenar y hacer cálculos con matrices.
+\end{abstract}
+
+\section{Introducción}
+
+ MATLAB es una herramienta metemática de uso educativo, comercial, y profesional, su nombre se compone de laboratory(laboratorio) y matrix(matrices) leyendose como laboratorio de matrices. Es un software matemático usado en universidades, centros de desarrollo e investigación. Aqui les presentaremos unas pequeñas muestras del uso de MATLAB aunque cabe destacar que los cálculos se realizarán con una herramienta similar a MATLAB, la cual es OCTAVE. 
+
+\section{Vectores y matrices}
+
+\subsection{Operaciones con vectores y gráficos}
+
+Cuál es el resultado de aplicar las siguientes operaciones:
+
+\begin{enumerate}[i)]
+\item x = [10:-2:1] = 10   8   6   4   2   Lo que nos dice que hay una lista, por los corchetes ([ ]). En este caso comienza desde el número diez, luego se le resta periódicamente 2, por lo tanto, los elementos pertenecientes a esta lista serán todos los valores de x = 10 –2k  con k perteneciente a lo nueros enteros, tales que los valores de x sean mayores o iguales a 1.
+\item x*2 = 20   16   12   8   4  Lo que nos dice que a cada elemento de la lista "x" se multiplica por 2.
+\item x*x = error   Como se ve, nos resulta un error, lo que es normal según el equipo docente (justificación no conocida), pero como "x" es una lista de elementos, es deducible que a cada elemento de "x", se le multiplica por sí mismo, pero OCTAVE no reconoce esta ecuación.
+\item x.*x = 100\hspace{0.1cm}   36   16   4   Esta es la ecuación que representa el punto iii, la cual si es reconocible por OCTAVE.
+\item plot(x, [1:5]) Al poner esta proposición, nos entrega un gráfico de la lista de datos "x", ordenados en dos ejes de coordenadas, los cuales en el eje vertical contienen los valores que seleccionamos “[1:5]” y en el eje horizontal los valores que toma x, esta línea tiene una pendiente de “-2”.
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.35\textwidth]{grafico_1.png}
+\caption{\label{foto1}Gráfico v}
+\end{figure}
+\item plot(x, [1:5], "+")(a)  Al poner el "+", la diferencia con el grafico anterior es que en vez de una línea, se intercambian por signos “+” ubicados a la misma distancia unos del otro, siguiendo los patrones de los ejes. Luego insertamos con otro signo: plot(x, [1:5], "-")(b), donde nos muestra el mismo gráfico que el gráfico “v” ya que el signo menos representa una línea llena, probamos ahora con plot(x,[1:5],"*")(c) y nos resulta lo mismo que plot(x,[1:5],"+")(a) pero ya no con símbolo de suma, si no con los mismos “*”.
+Nos damos cuenta de que lo que está entre comillas es el símbolo que queremos que represente nuestros resultados.
+
+\begin{figure} [H]
+ \centering
+  \subfloat[Gráfico vi]{
+   \label{f:(a)}
+    \includegraphics[width=0.36\textwidth]{grafico_vi.png}}
+  \subfloat[Gráfico vi]{
+   \label{f:(b)}
+    \includegraphics[width=0.3275\textwidth]{grafico_1.png}}
+  \subfloat[Gráfico vi]{
+   \label{f:(c)}
+    \includegraphics[width=0.36\textwidth]{grafico_vic.png}}
+ \caption{Gráficos vi}
+ \label{f:Gráficos vi}
+\end{figure}
+\item plot(x, [1:5], "+r") Al agregarle la “r” sucede que nos muestra el mismo grafico vi(a) pero de color rojo(red). Probamos ahora con  plot(x,[1:5],"pg") y nos un graficó igual a los demás pero con estrellas(pentagramas) verdes(green). Luego intentamos con  plot(x,[1:5],"--r") y nos entrega el mismo gráfico pero con líneas entrecortadas y rojas. En conclusión, al poner dos símbolos entre comillas, el de la izquierda será el símbolo del gráfico,y la letra indicará el color. 
+\end{enumerate}
+\begin{figure} [H]
+ \centering
+  \subfloat[Gráfico vii]{
+   \label{f:(a)}
+    \includegraphics[width=0.36\textwidth]{grafico_viia.png}}
+  \subfloat[Gráfico vii]{
+   \label{f:(b)}
+    \includegraphics[width=0.36\textwidth]{grafico_viie.png}}
+  \subfloat[Gráfico vii]{
+   \label{f:(c)}
+    \includegraphics[width=0.36\textwidth]{grafico_viic.png}}
+ \caption{Gráficos vii}
+ \label{f:Gráficos vii}
+\end{figure}
+
+
+
+\subsection{Operaciones con Matrices}
+
+Podemos ver una matriz como una lista de vectores. Por ejemplo: 
+ \[
+   M=
+  \left[ {\begin{array}{cccc}
+   1 & 2 & 3 & 4 \\
+   2 & 4 & 6 & 8 \\
+   3 & 6 & 9 & 12 \\
+   4 & 8 & 12 & 16 \\
+   \end{array} } \right]
+\]
+
+Definiremos los siguientes vectores y asi trabajar luego con matrices.
+\begin{enumerate}[i)]
+\item m1=1:4  Esto nos resulta:  1\hspace{0,3cm}2\hspace{0,3cm}3\hspace{0,3cm}4\hspace{0,3cm}ya que 1:4 indica la fila de números del 1 al 4.
+\item  m2=m1'  Esto nos resulta:
+
+\vspace{0,01cm}{1}
+
+\vspace{0,01cm}{2}
+
+\vspace{0,01cm}{3}
+
+\vspace{0,01cm}{4}
+
+\vspace{0,5cm}
+Nos damos cuenta que la comilla nos transforma una fila en columna
+\item m1*m2  Esto nos resulta:  30, la ecuación que resulta es 1*1 + 2*2 + 3*3 + 4*4 = 30
+ 
+\item m2*m1  Aquí nos entrega la matriz completa.
+
+\vspace{0,01cm}{1\hspace{0,3cm}2\hspace{0,3cm}3\hspace{0,3cm}4}
+
+\vspace{0,01cm}{2\hspace{0,3cm}4\hspace{0,3cm}6\hspace{0,3cm}8}
+
+\vspace{0,01cm}{3\hspace{0,3cm}6\hspace{0,3cm}9\hspace{0,2cm}12}
+
+\vspace{0,01cm}{4\hspace{0,3cm}8\hspace{0,18cm}12\hspace{0,17cm}16}
+
+\vspace{0,4cm}
+
+\item m3 = [1:4; 0 4:2:8; 0 0 9:3:12; 0 0 0 16] Esto nos resulta:
+
+\vspace{0,01cm}{1\hspace{0,3cm}2\hspace{0,3cm}3\hspace{0,3cm}4}
+
+\vspace{0,01cm}{0\hspace{0,3cm}4\hspace{0,3cm}6\hspace{0,3cm}8}
+
+\vspace{0,01cm}{0\hspace{0,3cm}0\hspace{0,3cm}9\hspace{0,2cm}12}
+
+\vspace{0,01cm}{0\hspace{0,3cm}0\hspace{0,3cm}0\hspace{0,2cm}16}
+
+\vspace{0,5cm}
+Esta es una manera de llenar los datos de la matriz, poniendo las filas por separado y dejando explicito que en cierto lugar va cierto número.
+\item m4=m3'  Es igual a:
+
+\vspace{0,01cm}{1\hspace{0,3cm}0\hspace{0,3cm}0\hspace{0,3cm}0}
+
+\vspace{0,01cm}{2\hspace{0,3cm}4\hspace{0,3cm}0\hspace{0,3cm}0}
+
+\vspace{0,01cm}{3\hspace{0,3cm}6\hspace{0,3cm}9\hspace{0,3cm}0}
+
+\vspace{0,01cm}{4\hspace{0,3cm}8\hspace{0,17cm}12\hspace{0,17cm}16}
+
+\vspace{0,5cm}
+Como se aprecia la comilla tambien puede invertir los ejes de una matriz completa.
+\vspace{0,5cm}
+\item m3*m4  Esto nos resulta:
+
+\vspace{0,01cm}{30\hspace{0,4cm}58\hspace{0,45cm}75\hspace{0,5cm}64}
+
+\vspace{0,01cm}{58\hspace{0,3cm}116\hspace{0,3cm}150\hspace{0,3cm}128}
+
+\vspace{0,01cm}{75\hspace{0,3cm}150\hspace{0,3cm}225\hspace{0,3cm}192}
+
+\vspace{0,01cm}{64\hspace{0,3cm}128\hspace{0,3cm}192\hspace{0,3cm}256}
+
+\vspace{0,5cm}
+En este caso se relacionan las dos matrices.
+\item m4*m3  Esto nos resulta:
+
+\vspace{0,01cm}{1\hspace{0,4cm}2\hspace{0,5cm}3\hspace{0,5cm}4}
+
+\vspace{0,01cm}{2\hspace{0,3cm}20\hspace{0,3cm}30\hspace{0,35cm}40}
+
+\vspace{0,01cm}{3\hspace{0,3cm}30\hspace{0,2cm}126\hspace{0,2cm}168}
+
+\vspace{0,01cm}{4\hspace{0,3cm}40\hspace{0,2cm}168\hspace{0,2cm}480}
+
+\vspace{0,4cm}
+\end{enumerate} 
+En conclusión, con estos programas podemos relacionar datos agrupados ordenados y trabajarlas facilmente como matrices, para luego graficar de manera dinámica. Ya sabemos lo básico de MATLAB u OCTAVE, por ende tambien estamos listos para trabajar en el durante de la clase N°6 de Herramientas Computacionales.
+
+
+\end{document}
