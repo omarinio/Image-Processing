@@ -1,0 +1,2 @@
+error: cast from ‘cv::Scalar (*)(cv::InputArray) {aka cv::Scalar_<double> (*)(const cv::_InputArray&)}’ to ‘uchar {aka unsigned char}’ loses precision [-fpermissive]
+
