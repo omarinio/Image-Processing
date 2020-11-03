@@ -26,6 +26,7 @@ Mat threshold(
     cv::Mat &input);
 
 void hough(
+    Mat &input,
     Mat &gradient, 
     Mat &direction, 
     int ***houghSpace,
@@ -92,13 +93,13 @@ int main( int argc, char** argv ) {
 
     int ***houghSpace = malloc3dArray(image.rows, image.cols, MAXRADIUS);
 
-    // Mat testing = imread("mag.jpg", 1);
+    Mat testing = imread("mag.jpg", 1);
     Mat gray_test;
-    cvtColor( resultMag, gray_test, CV_BGR2GRAY );
+    cvtColor( testing, gray_test, CV_BGR2GRAY );
 
     Mat thresh = threshold(gray_test);
 
-    hough(thresh, dirSobel, houghSpace, MAXRADIUS-MINRADIUS);
+    hough(image, thresh, dirSobel, houghSpace, MAXRADIUS-MINRADIUS);
 
     return 0;
 }
@@ -168,7 +169,7 @@ Mat threshold(cv::Mat &input) {
 		for( int j = 0; j < input.cols; j++ ) {
             int imageval = ( int ) input.at<uchar>( i, j );
             
-            if (imageval > 110) {
+            if (imageval > 60) {
                 thresh.at<uchar>( i, j ) = 255;
             } else {
                 thresh.at<uchar>( i, j ) = 0;
@@ -180,7 +181,7 @@ Mat threshold(cv::Mat &input) {
     return thresh;
 }
 
-void hough(Mat &gradient, Mat &direction, int ***houghSpace, int radius) {
+void hough(Mat &input, Mat &gradient, Mat &direction, int ***houghSpace, int radius) {
     for (int i = 0; i < gradient.rows; i++) {
         for (int j = 0; j < gradient.cols; j++) {
             for (int k = 0; k < MAXRADIUS; k++) {
@@ -217,7 +218,15 @@ void hough(Mat &gradient, Mat &direction, int ***houghSpace, int radius) {
         for (int y = 0; y < gradient.cols; y++) {
             for (int r = MINRADIUS; r < MAXRADIUS; r++) {
                 houghSpaceOutput.at<float>(x,y) += houghSpace[x][y][r];
+                if (houghSpace[x][y][r] > 20) {
+                    std::cout << "circle" << std::endl;
+                    circle(input, Point(y, x), r, (0, 255, 255), 2);
+                }
+                // if(!(pow((x-xc),2) + pow((y-yc),2) > pow(rc,2))) {
+                //     test_pass = false;
+                // }
             }
+            
         }
     }
 
@@ -225,6 +234,7 @@ void hough(Mat &gradient, Mat &direction, int ***houghSpace, int radius) {
     normalize(houghSpaceOutput, houghSpaceConvert, 0, 255, NORM_MINMAX);
 
     imwrite( "houghOuput.jpg", houghSpaceConvert );
+    imwrite("output3.jpg", input);
 }
 
 void GaussianBlur(cv::Mat &input, int size, cv::Mat &blurredOutput)
