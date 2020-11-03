@@ -92,9 +92,9 @@ int main( int argc, char** argv ) {
 
     int ***houghSpace = malloc3dArray(image.rows, image.cols, MAXRADIUS);
 
-    Mat testing = imread("mag.jpg", 1);
+    // Mat testing = imread("mag.jpg", 1);
     Mat gray_test;
-    cvtColor( testing, gray_test, CV_BGR2GRAY );
+    cvtColor( resultMag, gray_test, CV_BGR2GRAY );
 
     Mat thresh = threshold(gray_test);
 
@@ -218,7 +218,6 @@ void hough(Mat &gradient, Mat &direction, int ***houghSpace, int radius) {
             for (int r = MINRADIUS; r < MAXRADIUS; r++) {
                 houghSpaceOutput.at<float>(x,y) += houghSpace[x][y][r];
             }
-
         }
     }
 
